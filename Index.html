@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Erwin Schrödinger | Vida, Obra y Línea del Tiempo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="stilos.css">
+    <style>
+    </style>
+</head>
+<body class="antialiased selection:bg-zinc-700 selection:text-zinc-100">
+
+    <!-- Navbar -->
+    <nav class="bg-zinc-900/80 backdrop-blur-md text-zinc-300 fixed w-full z-50 top-0 border-b border-zinc-800 transition-all duration-300">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 relative">
+            <div class="flex justify-between items-center h-16 relative z-20">
+                <!-- Ícono de Inicio -->
+                <a href="#inicio" class="flex items-center hover:text-zinc-100 hover:scale-105 transition duration-500" title="Ir al inicio">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 sm:h-6 sm:w-6 mr-2 opacity-80" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                    </svg>
+                    <span class="font-light text-base sm:text-lg tracking-widest uppercase">Schrödinger</span>
+                </a>
+
+                <!-- Botón de la Caja Cuántica (Centro) -->
+                <div class="absolute left-1/2 transform -translate-x-1/2 flex items-center z-30">
+                    <button id="box-button" class="text-zinc-500 hover:text-zinc-200 transition duration-300 group flex flex-col items-center focus:outline-none cursor-pointer" title="Abrir la caja">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 sm:h-8 sm:w-8 group-hover:scale-110 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Menú Desplegable -->
+                <div class="relative dropdown-wrapper">
+                    <button class="flex items-center space-x-1 hover:text-zinc-100 focus:outline-none transition duration-300 px-3 sm:px-4 py-2 rounded-md bg-zinc-800/50 border border-zinc-700/50 text-sm sm:text-base">
+                        <span class="font-light tracking-wider">Explorar</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 opacity-70" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <!-- Contenido del Dropdown -->
+                    <div class="dropdown-menu absolute right-0 mt-2 w-48 sm:w-56 bg-zinc-800/95 backdrop-blur-xl text-zinc-300 rounded-md shadow-2xl overflow-hidden border border-zinc-700">
+                        <a href="#biografia" class="block px-4 py-3 hover:bg-zinc-700/80 hover:text-zinc-100 border-b border-zinc-700/50 transition font-light text-sm">Su Vida</a>
+                        <a href="#linea-tiempo" class="block px-4 py-3 hover:bg-zinc-700/80 hover:text-zinc-100 border-b border-zinc-700/50 transition font-light text-sm">Línea del Tiempo</a>
+                        <a href="#aportaciones" class="block px-4 py-3 hover:bg-zinc-700/80 hover:text-zinc-100 border-b border-zinc-700/50 transition font-light text-sm">Aportaciones</a>
+                        <a href="#gato" class="block px-4 py-3 hover:bg-zinc-700/80 hover:text-zinc-100 border-b border-zinc-700/50 transition font-light text-sm">La Paradoja</a>
+                        <a href="#legado" class="block px-4 py-3 hover:bg-zinc-700/80 hover:text-zinc-100 transition font-light text-sm">Legado</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gato Animado del Menú -->
+            <div class="absolute left-1/2 transform -translate-x-1/2 top-full w-28 h-28 overflow-hidden pointer-events-none z-10">
+                <div id="schrodinger-cat-tab" class="bg-zinc-900 border-b border-l border-r border-zinc-800 rounded-b-xl px-4 py-3 flex flex-col items-center justify-center transform -translate-y-full transition-transform duration-700 ease-in-out pointer-events-auto">
+                    <!-- Gato Vivo -->
+                    <svg id="cat-alive" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 text-zinc-300">
+                        <path d="M5 9l-2-6 5 3" />
+                        <path d="M19 9l2-6-5 3" />
+                        <path d="M19 12a7 7 0 1 0-14 0" />
+                        <path d="M5 12c0 5 3 9 7 9s7-4 7-9" />
+                        <circle cx="9" cy="12" r="1" fill="currentColor"/>
+                        <circle cx="15" cy="12" r="1" fill="currentColor"/>
+                        <path d="M12 15l-1 1h2z" fill="currentColor" />
+                        <path d="M12 16c0 1-1 2-2 2" />
+                        <path d="M12 16c0 1 1 2 2 2" />
+                        <path d="M2 12l3 1" />
+                        <path d="M2 14l3-1" />
+                        <path d="M22 12l-3 1" />
+                        <path d="M22 14l-3-1" />
+                    </svg>
+                    <!-- Gato Muerto (Esqueleto) -->
+                    <svg id="cat-dead" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 text-zinc-600 hidden">
+                        <path d="M5 9l-2-6 5 3" />
+                        <path d="M19 9l2-6-5 3" />
+                        <path d="M19 12a7 7 0 1 0-14 0" />
+                        <path d="M5 12v3a2 2 0 0 0 2 2h1v2a1 1 0 0 0 2 0v-2h4v2a1 1 0 0 0 2 0v-2h1a2 2 0 0 0 2-2v-3" />
+                        <circle cx="9" cy="12" r="1.5" />
+                        <circle cx="15" cy="12" r="1.5" />
+                        <path d="M12 15l-1 2h2z" fill="currentColor"/>
+                    </svg>
+                    <span id="cat-status-text" class="mt-2 text-[10px] font-bold tracking-[0.2em] text-zinc-300 uppercase">Vivo</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header / Hero Section -->
+    <header id="inicio" class="relative min-h-screen flex items-center justify-center border-b border-zinc-800 overflow-hidden">
+        <div class="grid-container"><div class="grid-plane"></div></div>
+        <div class="floating-math math-1">iℏ ∂Ψ/∂t = ĤΨ</div>
+        <div class="floating-math math-2">Ψ(x,t)</div>
+        <div class="floating-math math-3">∫ |Ψ|² dx = 1</div>
+
+        <div class="relative z-10 text-center px-6 max-w-5xl mx-auto pt-20">
+            <h1 class="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-light text-transparent bg-clip-text bg-gradient-to-b from-zinc-200 via-zinc-400 to-zinc-600 tracking-tighter mb-4 sm:mb-8 drop-shadow-md">
+                Schrödinger
+            </h1>
+            <p class="text-lg sm:text-2xl md:text-3xl text-zinc-500 font-light tracking-widest mb-10 max-w-2xl mx-auto leading-relaxed">
+                El arquitecto de la incertidumbre.
+            </p>
+            <a href="#biografia" class="inline-block border border-zinc-600/50 text-zinc-400 hover:bg-zinc-200 hover:text-zinc-900 transition duration-500 px-6 sm:px-10 py-3 sm:py-4 rounded-full text-sm sm:text-base tracking-widest uppercase shadow-lg backdrop-blur-sm">
+                Descubrir su mundo
+            </a>
+        </div>
+    </header>
+
+    <!-- Contenido Principal -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 py-16 sm:py-24 space-y-24 sm:space-y-40">
+
+        <!-- Sección: Biografía -->
+        <section id="biografia" class="reveal scroll-mt-24 flex flex-col md:flex-row items-center gap-10 sm:gap-16">
+            <div class="w-full md:w-5/12">
+                <div class="bg-zinc-800/40 backdrop-blur-sm aspect-square md:aspect-[4/5] w-full rounded-2xl shadow-xl flex flex-col items-center justify-center border border-zinc-700/50 relative overflow-hidden group">
+                    <div class="absolute inset-0 bg-gradient-to-b from-transparent to-zinc-900/80 z-0"></div>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-24 w-24 sm:h-32 sm:w-32 text-zinc-600 z-10 opacity-50 group-hover:opacity-80 group-hover:scale-105 transition duration-700 font-light" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="0.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                    <p class="z-10 mt-6 text-zinc-500 tracking-widest uppercase text-xs sm:text-sm font-light">Viena, 1887</p>
+                </div>
+            </div>
+            <div class="w-full md:w-7/12">
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-light text-zinc-200 mb-6 sm:mb-8 flex items-center gap-4">
+                    <span class="w-8 sm:w-16 h-px bg-zinc-500 block"></span> Sus Inicios y Exilio
+                </h2>
+                <div class="space-y-4 sm:space-y-6 text-zinc-400 text-base sm:text-lg leading-relaxed font-light">
+                    <p>
+                        Erwin Rudolf Josef Alexander Schrödinger nació el 12 de agosto de 1887 en una Viena cubierta por el velo del Imperio austrohúngaro. Su mente se forjó en el Akademisches Gymnasium, profundamente influenciado por las corrientes filosóficas y científicas de la época.
+                    </p>
+                    <p>
+                        La Primera Guerra Mundial interrumpió su juventud, llevándolo al frente como oficial de artillería. Al regresar, la melancolía de la posguerra no detuvo su genio; transitó por diversas universidades europeas hasta encontrar su primer gran refugio intelectual en Zúrich.
+                    </p>
+                    <p class="border-l-2 border-zinc-600 pl-4 italic text-zinc-500">
+                        Tras ganar el Premio Nobel y con el ascenso del nazismo en 1933, su ética lo obligó a abandonar Alemania. Vivió en Oxford y luego, por invitación personal del Primer Ministro Éamon de Valera, se mudó a Irlanda en 1940. En Dublín fundó el Instituto de Estudios Avanzados, donde pasó 17 de sus años más creativos y tranquilos.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección: Línea del Tiempo -->
+        <section id="linea-tiempo" class="reveal scroll-mt-24">
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-light text-center text-zinc-200 mb-16 sm:mb-24 tracking-wide">Ecos en el Tiempo</h2>
+            
+            <div class="timeline-container">
+                <div class="timeline-item reveal">
+                    <div class="bg-zinc-800/30 backdrop-blur-sm p-6 sm:p-8 rounded-2xl border border-zinc-700/50 shadow-lg hover:bg-zinc-800/50 transition duration-500">
+                        <h3 class="text-xl sm:text-2xl font-light text-zinc-300 mb-2">1887</h3>
+                        <p class="text-zinc-500 text-sm sm:text-base font-light">Nace en la penumbra de Erdberg, Viena.</p>
+                    </div>
+                </div>
+                <div class="timeline-item reveal">
+                    <div class="bg-zinc-800/30 backdrop-blur-sm p-6 sm:p-8 rounded-2xl border border-zinc-700/50 shadow-lg hover:bg-zinc-800/50 transition duration-500">
+                        <h3 class="text-xl sm:text-2xl font-light text-zinc-300 mb-2">1926</h3>
+                        <p class="text-zinc-500 text-sm sm:text-base font-light">Formula su <strong>Ecuación de Onda</strong>, desdibujando la línea entre partícula y probabilidad.</p>
+                    </div>
+                </div>
+                <div class="timeline-item reveal">
+                    <div class="bg-zinc-800/30 backdrop-blur-sm p-6 sm:p-8 rounded-2xl border border-zinc-700/50 shadow-lg hover:bg-zinc-800/50 transition duration-500">
+                        <h3 class="text-xl sm:text-2xl font-light text-zinc-300 mb-2">1933</h3>
+                        <p class="text-zinc-500 text-sm sm:text-base font-light">Galardonado con el <strong>Premio Nobel de Física</strong>. Abandona Alemania por repudio al régimen nazi.</p>
+                    </div>
+                </div>
+                <div class="timeline-item reveal">
+                    <div class="bg-zinc-800/30 backdrop-blur-sm p-6 sm:p-8 rounded-2xl border border-zinc-700/50 shadow-lg hover:bg-zinc-800/50 transition duration-500">
+                        <h3 class="text-xl sm:text-2xl font-light text-zinc-300 mb-2">1935</h3>
+                        <p class="text-zinc-500 text-sm sm:text-base font-light">Plantea su experimento mental: el gato que desafía la realidad y la muerte.</p>
+                    </div>
+                </div>
+                <div class="timeline-item reveal">
+                    <div class="bg-zinc-800/30 backdrop-blur-sm p-6 sm:p-8 rounded-2xl border border-zinc-700/50 shadow-lg hover:bg-zinc-800/50 transition duration-500">
+                        <h3 class="text-xl sm:text-2xl font-light text-zinc-300 mb-2">1940</h3>
+                        <p class="text-zinc-500 text-sm sm:text-base font-light">Se establece en Dublín (Irlanda), iniciando una prolífica etapa de investigaciones interdisciplinarias.</p>
+                    </div>
+                </div>
+                <div class="timeline-item reveal">
+                    <div class="bg-zinc-800/30 backdrop-blur-sm p-6 sm:p-8 rounded-2xl border border-zinc-700/50 shadow-lg hover:bg-zinc-800/50 transition duration-500">
+                        <h3 class="text-xl sm:text-2xl font-light text-zinc-300 mb-2">1961</h3>
+                        <p class="text-zinc-500 text-sm sm:text-base font-light">Fallece en Viena. Sus restos descansan bajo una cruz adornada con su propia ecuación.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección: Aportaciones -->
+        <section id="aportaciones" class="reveal bg-zinc-800/20 backdrop-blur-md p-8 sm:p-12 lg:p-16 rounded-3xl shadow-2xl border border-zinc-700/30 scroll-mt-24 relative overflow-hidden">
+            <div class="absolute -right-20 -top-20 w-64 h-64 bg-zinc-600 rounded-full mix-blend-overlay filter blur-[100px] opacity-10"></div>
+            
+            <h2 class="text-2xl sm:text-4xl lg:text-5xl font-light text-center text-zinc-200 mb-10 sm:mb-14">Las Aportaciones a la Ciencia</h2>
+            
+            <div class="text-center mb-10 sm:mb-14">
+                <div class="inline-block bg-zinc-900/80 text-zinc-200 px-6 sm:px-12 py-6 sm:py-8 rounded-2xl shadow-inner font-serif text-2xl sm:text-4xl lg:text-5xl border border-zinc-800 overflow-x-auto max-w-full">
+                    iℏ <span class="text-zinc-500">∂Ψ/∂t</span> = Ĥ<span class="text-zinc-500">Ψ</span>
+                </div>
+                <p class="text-xs sm:text-sm text-zinc-500 mt-6 tracking-widest uppercase font-light">Ecuación de onda fundamental</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-10 sm:gap-16 text-zinc-400 text-base sm:text-lg leading-relaxed max-w-5xl mx-auto font-light text-justify">
+                <div>
+                    <h3 class="text-xl text-zinc-200 mb-3 border-b border-zinc-700 pb-2">Mecánica Ondulatoria</h3>
+                    <p>
+                        Schrödinger arrebató al universo sus certezas absolutas. En 1926, tradujo la materia a un lenguaje de ondas, demostrando que a nivel subatómico, la realidad no es un punto fijo, sino una nube de posibilidades. La función de onda (<strong class="font-serif italic text-zinc-300">Ψ</strong>) se convirtió en el fantasma dentro de la máquina cuántica, indicando dónde <em>podría</em> estar un electrón.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-xl text-zinc-200 mb-3 border-b border-zinc-700 pb-2">Termodinámica y Colorimetría</h3>
+                    <p>
+                        Lejos de limitarse a la cuántica, hizo contribuciones vitales a la <strong>termodinámica estadística</strong>. Además, poseía una inmensa fascinación por cómo percibimos la luz. Schrödinger desarrolló modelos matemáticos sofisticados sobre los espacios de color, sentando muchas bases teóricas para la colorimetría moderna que utilizamos hoy en día en pantallas y diseño.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección: El Gato de Schrödinger y Módulo de Inteligencia Artificial (GEMINI) -->
+        <section id="gato" class="reveal scroll-mt-24">
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-light text-zinc-200 mb-10 sm:mb-16 flex items-center gap-4">
+                <span class="w-8 sm:w-16 h-px bg-zinc-500 block"></span> Entre la Vida y la Muerte
+            </h2>
+            <div class="flex flex-col lg:flex-row gap-12 lg:gap-16 items-center">
+                <div class="w-full lg:w-1/2 text-zinc-400 text-base sm:text-lg leading-relaxed space-y-6 sm:space-y-8 font-light">
+                    <p>
+                        Aterrado por las implicaciones filosóficas de su propia teoría, Schrödinger se resistió a la "Interpretación de Copenhague", la cual sugería que la realidad solo se define al ser observada.
+                    </p>
+                    <p>
+                        En un intento de demostrar lo absurdo de esta idea, concibió una trampa conceptual, una paradoja melancólica: <strong>El Gato de Schrödinger</strong>.
+                    </p>
+                    <div class="bg-zinc-800/30 p-6 sm:p-8 border-l-2 border-zinc-500 rounded-r-2xl shadow-inner backdrop-blur-sm">
+                        <p class="text-zinc-400 text-sm sm:text-base">
+                            Un felino encerrado en una cámara de acero. Junto a él, un mecanismo diabólico impulsado por el azar cuántico de un átomo radiactivo. Mientras la caja permanezca cerrada, la física dicta que el átomo ha decaído y no ha decaído simultáneamente. En ese silencio hermético, <span class="text-zinc-200">el gato existe en un limbo: vivo y muerto al mismo tiempo</span>, hasta que un observador decide su destino al abrir la tapa.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- ZONA SELECCIONADA POR EL USUARIO: IMAGEN Y NUEVO CHATBOT GEMINI AI -->
+                <div class="w-full lg:w-1/2 relative px-4 sm:px-0 flex flex-col items-center">
+                    
+                    <!-- Imagen Interactiva -->
+                    <div class="relative group w-full">
+                        <div class="absolute -inset-4 bg-zinc-700/20 rounded-3xl blur-2xl opacity-50 group-hover:opacity-80 transition duration-1000"></div>
+                        <img id="main-cat-image" src="illustration-erwin-schroedingers-or-schroedinger-260nw-1452985700.webp" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1533738363-b7f9aef128ce?q=80&w=1000&auto=format&fit=crop';" alt="Ilustración del Gato de Schrödinger" class="cat-image relative w-full max-w-md mx-auto lg:max-w-full h-auto rounded-2xl border border-zinc-700/50 z-10">
+                        <p id="main-cat-text" class="text-center text-xs text-zinc-600 mt-4 tracking-widest uppercase relative z-10 transition-colors duration-500">Toca la imagen para revelar la realidad</p>
+                    </div>
+
+                    <!-- NUEVA CARACTERÍSTICA: Interfaz de Inteligencia Artificial (Gemini API) -->
+                    <div class="mt-8 w-full max-w-md lg:max-w-full bg-zinc-800/40 p-6 rounded-2xl border border-zinc-700/50 backdrop-blur-md z-10 relative">
+                        <div class="absolute top-0 right-0 p-3 opacity-50" title="Desarrollado con Gemini API">
+                            <svg class="w-5 h-5 text-zinc-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L15 9L22 12L15 15L12 22L9 15L2 12L9 9L12 2Z"/></svg>
+                        </div>
+                        <h3 class="text-zinc-200 text-lg font-light mb-4 text-center tracking-widest uppercase">Oráculo Cuántico (IA)</h3>
+                        <p class="text-zinc-500 text-xs text-center mb-4">La caja contiene una anomalía. Puedes intentar comunicarte con el gato de Schrödinger usando Inteligencia Artificial.</p>
+                        
+                        <div class="flex flex-col gap-3">
+                            <input id="cat-chat-input" type="text" placeholder="¿Estás vivo o muerto, gatito?..." class="w-full bg-zinc-900 border border-zinc-600 rounded-lg px-4 py-3 text-zinc-300 focus:outline-none focus:border-zinc-400 text-sm">
+                            <button id="cat-chat-btn" class="w-full bg-zinc-700 hover:bg-zinc-600 text-zinc-200 py-3 rounded-lg transition duration-300 font-bold uppercase text-xs tracking-widest shadow-lg flex justify-center items-center gap-2">
+                                Consultar a la Anomalía
+                            </button>
+                        </div>
+                        
+                        <!-- Caja de Respuesta de Gemini -->
+                        <div id="cat-chat-response" class="hidden mt-4 p-4 border-l-2 border-zinc-500 bg-zinc-900/50 rounded-r-lg text-sm text-zinc-400 italic"></div>
+                    </div>
+                    <!-- Fin sección IA -->
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección: Legado -->
+        <section id="legado" class="reveal bg-gradient-to-b from-zinc-800/40 to-zinc-900/80 backdrop-blur-sm p-8 sm:p-12 lg:p-16 rounded-3xl shadow-2xl border border-zinc-700/50 mb-12 scroll-mt-24">
+            <h2 class="text-2xl sm:text-3xl lg:text-4xl font-light text-zinc-200 border-b border-zinc-700/50 pb-6 mb-10">Ecos Finales</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-10 text-zinc-400">
+                <div class="p-6 sm:p-8 rounded-2xl border border-zinc-700/30 hover:bg-zinc-800/40 transition duration-500">
+                    <h3 class="text-lg sm:text-xl font-light text-zinc-300 mb-4">El Enigma de la Vida</h3>
+                    <p class="text-sm sm:text-base leading-relaxed font-light">A través de su obra <em>"¿Qué es la vida?"</em>, buscó el orden dentro del caos biológico, teorizando la existencia de un "cristal aperiódico" que resguardaba los secretos de la herencia genética. Este libro fue vital para inspirar a Watson y Crick a descubrir el ADN.</p>
+                </div>
+                <div class="p-6 sm:p-8 rounded-2xl border border-zinc-700/30 hover:bg-zinc-800/40 transition duration-500">
+                    <h3 class="text-lg sm:text-xl font-light text-zinc-300 mb-4">Filosofía de Oriente</h3>
+                    <p class="text-sm sm:text-base leading-relaxed font-light">Encontró profundo consuelo en el misticismo del Vedanta y la filosofía hindú. Argumentaba científicamente que la pluralidad de las mentes es una ilusión humana, y que en el tejido de la realidad, existe una sola consciencia universal de la que todos formamos parte.</p>
+                </div>
+                <div class="p-6 sm:p-8 rounded-2xl border border-zinc-700/30 hover:bg-zinc-800/40 transition duration-500 sm:col-span-2 lg:col-span-1">
+                    <h3 class="text-lg sm:text-xl font-light text-zinc-300 mb-4">La Búsqueda Unificada</h3>
+                    <p class="text-sm sm:text-base leading-relaxed font-light">Al igual que su buen amigo Albert Einstein, consumió sus últimos años en el ocaso de la física intentando tejer una teoría que unificara todas las fuerzas fundamentales del universo (gravedad y electromagnetismo). Una hermosa partitura inconclusa.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-zinc-950 text-zinc-600 py-12 sm:py-16 text-center border-t border-zinc-900">
+        <div class="max-w-4xl mx-auto px-6">
+            <p class="mb-4 font-light text-sm sm:text-base">&copy; 2026. Un tributo en escala de grises al padre de la mecánica ondulatoria.</p>
+            <p class="text-xs sm:text-sm uppercase tracking-widest text-zinc-700">La realidad es solo una de las infinitas posibilidades.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+    </script>
+    <script src="js.js"></script>
+</body>
+</html>

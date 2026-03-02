@@ -1,0 +1,147 @@
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #18181b; /* zinc-900 */
+            color: #d4d4d8; /* zinc-300 */
+            overflow-x: hidden;
+        }
+
+        /* Menú Dropdown */
+        .dropdown-menu { display: none; }
+        .dropdown-wrapper:hover .dropdown-menu,
+        .dropdown-wrapper:focus-within .dropdown-menu { display: block; animation: fadeIn 0.4s ease; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Fondo animado de cuadrícula */
+        .grid-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            z-index: 0;
+            background: radial-gradient(circle at center, #27272a 0%, #18181b 70%);
+        }
+        .grid-plane {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            bottom: -50%;
+            left: -50%;
+            background-image: 
+                linear-gradient(to right, rgba(113, 113, 122, 0.1) 1px, transparent 1px),
+                linear-gradient(to top, rgba(113, 113, 122, 0.1) 1px, transparent 1px);
+            background-size: clamp(30px, 5vw, 50px) clamp(30px, 5vw, 50px);
+            transform: perspective(600px) rotateX(60deg);
+            animation: moveGrid 20s linear infinite;
+        }
+        @keyframes moveGrid {
+            0% { transform: perspective(600px) rotateX(60deg) translateY(0); }
+            100% { transform: perspective(600px) rotateX(60deg) translateY(50px); }
+        }
+
+        /* Ecuaciones Flotantes */
+        .floating-math {
+            position: absolute;
+            color: rgba(161, 161, 170, 0.2);
+            font-family: 'Times New Roman', serif;
+            z-index: 1;
+            animation: floatMath 10s ease-in-out infinite;
+            pointer-events: none;
+        }
+        @keyframes floatMath {
+            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.5; }
+            50% { transform: translateY(-20px) rotate(3deg); opacity: 1; }
+        }
+        .math-1 { top: 15%; left: 5%; animation-delay: 0s; font-size: clamp(1.2rem, 4vw, 2.5rem); }
+        .math-2 { top: 45%; right: 5%; animation-delay: 3s; font-size: clamp(1rem, 3vw, 2rem); }
+        .math-3 { bottom: 25%; left: 10%; animation-delay: 5s; font-size: clamp(1.5rem, 5vw, 3rem); }
+
+        /* Animaciones al hacer Scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Línea del Tiempo Responsiva */
+        .timeline-container {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .timeline-container::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background-color: #52525b;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1px;
+        }
+        .timeline-item {
+            padding: 20px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        .timeline-item:nth-child(odd) { left: 0; text-align: right; }
+        .timeline-item:nth-child(even) { left: 50%; text-align: left; }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background-color: #a1a1aa;
+            border: 3px solid #18181b;
+            border-radius: 50%;
+            z-index: 1;
+            top: 28px;
+            transition: all 0.5s ease;
+        }
+        .timeline-item:nth-child(odd)::after { right: -8px; }
+        .timeline-item:nth-child(even)::after { left: -8px; }
+        .timeline-item:hover::after { background-color: #e4e4e7; box-shadow: 0 0 15px rgba(228, 228, 231, 0.5); }
+
+        @media (max-width: 768px) {
+            .timeline-container::after { left: 24px; }
+            .timeline-item { width: 100%; padding-left: 60px; padding-right: 15px; text-align: left; }
+            .timeline-item:nth-child(even), .timeline-item:nth-child(odd) { left: 0%; }
+            .timeline-item:nth-child(odd)::after, .timeline-item:nth-child(even)::after { left: 16px; right: auto; }
+        }
+
+        /* Efecto flotante para el gato principal */
+        .cat-image {
+            animation: floatImage 8s ease-in-out infinite;
+            filter: grayscale(80%) brightness(0.8) drop-shadow(0 10px 15px rgba(0,0,0,0.5));
+            transition: filter 0.8s ease;
+            cursor: pointer;
+        }
+        .cat-image:hover, .cat-image.revealed {
+            filter: grayscale(0%) brightness(1) drop-shadow(0 0 25px rgba(161, 161, 170, 0.3));
+        }
+        @keyframes floatImage {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Efecto de pulso cuántico para IA */
+        .quantum-pulse {
+            animation: quantumPulse 2s infinite;
+        }
+        @keyframes quantumPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+        
